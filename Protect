@@ -1,4 +1,4 @@
--- Diamond Armor V.1
+-- Diamond Armor V.1.1
 
 local request = (request) or (syn and syn.request) or (SENTINEL_V2 ) or (PROTOSMASHER_LOADED and http_request) or (Fluxus.request)
 local is_excutor_function = (is_synapse_function) or (KRNL_LOADED) or (is_fluxus_funcntion) or (iselectronfunction) or (is_sirhurt_closure) or (shadow_env) or (secure_load) or (pebc_execute) or (isvm) or (getreg()['CalamariLuaEnv']) or (IS_COCO_LOADED) or (IS_VIVA_LOADED) or (WrapGlobal) or (jit) 
@@ -1022,59 +1022,61 @@ local ProtectRequest = function(C,X)
     end
 end
 
-spawn(function() -- all way protect
-    while true do
-        GCI = GCI + 1
-        xpcall(function()
-            GCF = getgc()[GCI]
-        end,function()
-            GCF = nil
-        end)
-        if GCF == nil then break; end
-        local FC = false;
-        if is_excutor_function(GCF) then
-            SF = SF + 1
-            local CPC = pcall(function() getconstants(GCF) end)
-            local CPCD = pcall(function() debug.getconstants(GCF) end)
-            if CPC or CPCD then
-                PCC = PCC + 1
-                local GCC = 0;
-                if #getconstants(GCF) == GCC or #getconstants(GCF) == GCC then break; end
-                GCC = GCC + 1
-                local C = CPC and getconstants(GCF)[GCC] or debug.getconstants(GCF)[GCC]
-                if C == "hookfunction" then
-                    ProtectRequest(getconstants(GCF)[3])
+while true do
+    GCI = GCI + 1
+    xpcall(function()
+        GCF = getgc()[GCI]
+    end,function()
+        GCF = nil
+    end)
+    if GCF == nil then break; end
+    local FC = false;
+    if is_excutor_function(GCF) then
+        SF = SF + 1
+        local CPC = pcall(function() getconstants(GCF) end)
+        local CPCD = pcall(function() debug.getconstants(GCF) end)
+        if CPC or CPCD then
+            PCC = PCC + 1
+            local GCC = 0;
+            if #getconstants(GCF) == GCC or #getconstants(GCF) == GCC then break; end
+            GCC = GCC + 1
+            local C = CPC and getconstants(GCF)[GCC] or debug.getconstants(GCF)[GCC]
+            if C == "hookfunction" then
+                ProtectRequest(getconstants(GCF)[3],true)
+            end
+            if C == "syn" or C == "Fluxus" then
+            ProtectRequest(getconstants(GCF)[3])
+            ProtectRequest(getconstants(GCF)[4])
+            end
+            if C == "print" or C == "warn" or tostring(C):match("rconsole") then
+                for i,v in pairs(getconstants(GCF)) do
+                    ProtectRequest(tostring(v),true)
                 end
-                if C == "syn" or C == "Fluxus" then
-                ProtectRequest(getconstants(GCF)[3])
-                ProtectRequest(getconstants(GCF)[4])
+            end
+            if C=="Url" or C=="Method" or C=="Body" or C=="Headers" then
+                for i,v in pairs(getconstants(GCF)) do
+                    ProtectRequest(tostring(v),true)
                 end
-                if C == "print" or C == "warn" or tostring(C):match("rconsole") then
-                    for i,v in pairs(getconstants(GCF)) do
-                        ProtectRequest(tostring(v),true)
-                    end
+            end                
+            if C == "type" then
+                for i,v in pairs(getconstants(GCF)) do
+                    ProtectRequest(tostring(v),true)
                 end
-                if C=="Url" or C=="Method" or C=="Body" or C=="Headers" then
-                    for i,v in pairs(getconstants(GCF)) do
-                        ProtectRequest(tostring(v),true)
-                    end
-                end                
-                if C == "type" then
-                    for i,v in pairs(getconstants(GCF)) do
-                        ProtectRequest(tostring(v),true)
-                    end
-                end
-                if C == "clonefunction" then
-                    ProtectRequest(tostring(C))
-                end
+            end
+            if C == "clonefunction" then
                 ProtectRequest(tostring(C))
             end
+            ProtectRequest(tostring(C))
         end
     end
-end)
-
-if not shared.userdata then
-    shared.userdata = clonefunction(request)
 end
 
 task.wait(3)
+
+--[[if not shared.userdata then
+    shared.userdata = clonefunction(request)
+end
+
+--print(shared.userdata({['Url']='https://pastebin.com/raw/BQ5Q052r',['Method']='GET'}).Body)
+print(tostring(excutor))
+]]
