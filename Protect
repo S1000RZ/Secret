@@ -1,9 +1,9 @@
-
 -- Diamond Armor V.1
 
 local request = (request) or (syn and syn.request) or (SENTINEL_V2 ) or (PROTOSMASHER_LOADED and http_request) or (Fluxus.request)
-local is_excutor_function = (is_synapse_function) or (KRNL_LOADED) or (is_fluxus_funcntion) or (iselectronfunction) or (is_sirhurt_closure) or (shadow_env) or (secure_load) or (pebc_execute) or (isvm) or (getreg()['CalamariLuaEnv']) or (IS_COCO_LOADED) or (IS_VIVA_LOADED) or (WrapGlobal) or (jit)
-local excutor = (syn) or (Fluxus) or (IS_COCO_LOADED) or (IS_VIVA_LOADED) or (unit) or (jit) or (shadow_env) or (isvm) or (WrapGlobal) or (KRNL_LOADED) or (pebc_execute) or (is_sirhurt_closure) or (secure_load) or (pebc_execute) or nil
+local is_excutor_function = (is_synapse_function) or (KRNL_LOADED) or (is_fluxus_funcntion) or (iselectronfunction) or (is_sirhurt_closure) or (shadow_env) or (secure_load) or (pebc_execute) or (isvm) or (getreg()['CalamariLuaEnv']) or (IS_COCO_LOADED) or (IS_VIVA_LOADED) or (WrapGlobal) or (jit) 
+local select = select(2,pcall(getfenv,0));
+local excutor = (syn) or (Fluxus) or (IS_COCO_LOADED) or (IS_VIVA_LOADED) or (unit) or (jit) or (shadow_env) or (isvm) or (WrapGlobal) or (KRNL_LOADED) or (pebc_execute) or (is_sirhurt_closure) or (secure_load) or (pebc_execute) or select
 local AuthTime = tick()
 local oldreg = getreg()
 local oldgc = getgc()
@@ -28,7 +28,7 @@ local GCRegister = function(C)
     end
 end
 
-if excutor then
+--[[if excutor then
     while true do
         GCI = GCI + 1
         if getgc()[GCI] == nil then break; end
@@ -54,7 +54,7 @@ if excutor then
     if SF < 300 or GCI < 2000 or PCC < 100 or ALH >= 4 then
         return game.Players.LocalPlayer:kick("[DIAMOND ARMOR] Tampering Detection | GC Checking")
     end
-end
+end]]
 
 for i,v in next, debug.getregistry() do
    if (typeof(v) == "function" and getfenv(v).script and getfenv(v).script.Name == "ChatReciver") then
@@ -1077,4 +1077,4 @@ if not shared.userdata then
     shared.userdata = clonefunction(request)
 end
 
-wait(3)
+task.wait(3)
