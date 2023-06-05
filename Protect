@@ -1,1 +1,1080 @@
 
+-- Diamond Armor V.1
+
+local request = (request) or (syn and syn.request) or (SENTINEL_V2 ) or (PROTOSMASHER_LOADED and http_request) or (Fluxus.request)
+local is_excutor_function = (is_synapse_function) or (KRNL_LOADED) or (is_fluxus_funcntion) or (iselectronfunction) or (is_sirhurt_closure) or (shadow_env) or (secure_load) or (pebc_execute) or (isvm) or (getreg()['CalamariLuaEnv']) or (IS_COCO_LOADED) or (IS_VIVA_LOADED) or (WrapGlobal) or (jit)
+local excutor = (syn) or (Fluxus) or (IS_COCO_LOADED) or (IS_VIVA_LOADED) or (unit) or (jit) or (shadow_env) or (isvm) or (WrapGlobal) or (KRNL_LOADED) or (pebc_execute) or (is_sirhurt_closure) or (secure_load) or (pebc_execute) or nil
+local AuthTime = tick()
+local oldreg = getreg()
+local oldgc = getgc()
+local gcinfoc = gcinfo()
+local Success = false
+local INC = 3
+local RPC = 2
+local COT = 0
+local COTF = 0
+local GCI = 0;
+local SF = 0;
+local PCC = 0;
+local ALH = 0;
+
+local functionRun = 0
+local GCRegister = function(C)
+    if tostring(C) == 'hookfunction' then
+        ALH = ALH + 1
+        if ALH >= 3 then
+            return game.Players.LocalPlayer:kick("[DIAMOND ARMOR] Tampering Detection | Hookfunction")
+        end
+    end
+end
+
+if excutor then
+    while true do
+        GCI = GCI + 1
+        if getgc()[GCI] == nil then break; end
+        local GCF = getgc()[GCI]
+        local FC = false;
+        if is_excutor_function(GCF) then
+            SF = SF + 1
+            local CPC = pcall(function() getconstants(GCF) end)
+            local CPCD = pcall(function() debug.getconstants(GCF) end)
+            if CPC or CPCD then
+                PCC = PCC + 1
+                local GCC = 0;
+                while true do
+                    if #getconstants(GCF) == GCC or #getconstants(GCF) == GCC then break; end
+                    GCC = GCC + 1
+                    local C = CPC and getconstants(GCF)[GCC] or debug.getconstants(GCF)[GCC]
+                    GCRegister(C)
+                end
+            end
+        end
+    end
+    print(SF,GCI,PCC,ALH)
+    if SF < 300 or GCI < 2000 or PCC < 100 or ALH >= 4 then
+        return game.Players.LocalPlayer:kick("[DIAMOND ARMOR] Tampering Detection | GC Checking")
+    end
+end
+
+for i,v in next, debug.getregistry() do
+   if (typeof(v) == "function" and getfenv(v).script and getfenv(v).script.Name == "ChatReciver") then
+        print("[DIAMOND ARMOR] Dex Detection... : ".. math.floor((tick() - AuthTime) * 1000) / 1000 .. " Seconds")
+        hookfunction(v, function()
+            return game.Players.LocalPlayer:kick("[DIAMOND ARMOR] Tampering Detection | Dex")
+        end);
+   end;
+end;
+getgenv().eqc = game:GetService("RunService").Heartbeat:Connect(function(step)
+    COT = COT+1
+    if COT < 99 then
+        INC = INC +  RPC * step
+    end
+    if COT > 99 then
+        eqc:Disconnect()
+        getgenv().fucking = true
+    end
+end)
+
+local EQC = function(a,b)
+    local T = {
+        a == b,
+        b == a,
+        not (a ~= b),
+        not (b ~= a),
+        a >= b,
+        a <= b,
+        b >= a,
+        b <= a,
+        a >= b and a <= b,
+        b >= a and b <= a,
+        not (a < b) and not (a > b),
+        not (b < a) and not (b > a),
+        rawequal(a,b)
+    }
+
+    local T_TEST;
+    setmetatable(T, {
+        __newindex = function()
+            T_TEST = true
+            return "Gamer Moment"
+        end,
+        __metatable = {}
+    })
+    
+    local I = 1;
+    while true do
+        if T[I] == nil then
+            break
+        end
+        if not T[I] then
+            return false
+        end
+        I = I + 1
+    end
+    return true and I - 1 == #T and T_TEST
+end
+repeat wait()
+   print("[DIAMOND ARMOR] Secure Checking... : ".. math.floor((tick() - AuthTime) * 1000) / 1000 .. " Seconds")
+until fucking
+repeat wait()
+   print("[DIAMOND ARMOR] Heartbeat Checking... : ".. math.floor((tick() - AuthTime) * 1000) / 1000 .. " Seconds")
+until eqc
+local checkSucc, checkRes = pcall(function()
+    for i, v in next, getgc() do
+        local funcEnv = getfenv(v).script
+        if is_excutor_function(v) and islclosure(v) and funcEnv ~= script then
+            local const = debug.getconstants(v)[1]
+			if const and type(const) == "string" and (const:match("hookfunc") or const:match("replaceclosure")) then
+                --while true do end
+                return game.Players.LocalPlayer:kick("[DIAMOND ARMOR] Tampering Detection | Get Gc Hook")
+			end
+		end
+    end
+end)
+repeat task.wait()
+    print("[DIAMOND ARMOR] Hookfunction Checking ... : ".. math.floor((tick() - AuthTime) * 1000) / 1000 .. " Seconds")
+until checkSucc
+
+INC = tostring(INC)
+INC = string.sub(INC,#INC -10,#INC)
+local oldgc = #getgc()
+local Equation = {
+    (function(v)
+        return math.floor(v/10) - 4
+    end),
+    (function(v)
+        return math.floor(v/10) - 7
+    end),
+    (function(v)
+        return math.floor(v/10) - 8
+    end),
+    (function(v)
+        return math.floor(v/10) - 6
+    end),
+    (function(v)
+        return math.floor(v/10) - 9
+    end),
+    (function(v)
+        return math.floor(v/10) - 6
+    end),
+    (function(v)
+        return math.floor(v/10) - 9
+    end)
+}
+
+if not game:IsLoaded() then
+	game.Loaded:Wait()
+end
+
+repeat
+	wait() 
+until game.Players
+
+if excutor then
+    if isreadonly(excutor) then
+        return game.Players.LocalPlayer:kick("[DIAMOND ARMOR] Tampering Detection | isreadonly"..tostring(isreadonly(excutor)))
+    end 
+end
+
+local function IsHooked(func)
+	if islclosure(func) then
+		return true
+	end
+	local info = debug.getinfo(func)
+	if info.source ~= "=[C]" or info.short_src ~= "=[C]" or info.what ~= "C" then
+		return true
+	end
+	return false
+end
+
+function Randomstring(L_1_arg0)
+	local L_2_ = ''
+	for L_3_forvar0, L_4_forvar1 in next, game:GetDescendants() do
+		if #L_2_ <= L_1_arg0 then
+			local L_5_ = string.sub(L_4_forvar1.Name, 1, 1)
+			local L_6_ = string.sub(L_4_forvar1.Name, #L_4_forvar1.Name, #L_4_forvar1.Name)
+			local L_7_ = string.sub(L_4_forvar1.Name, #L_4_forvar1.Name / 2, #L_4_forvar1.Name / 2)
+			L_2_ = L_2_ .. L_5_ .. L_6_ .. L_7_
+		end
+	end
+	for L_8_forvar0, L_9_forvar1 in next, game.Players:GetChildren() do
+		if #L_2_ <= L_1_arg0 then
+			local L_10_ = string.sub(L_9_forvar1.Name, 1, 1)
+			local L_11_ = string.sub(L_9_forvar1.Name, #L_9_forvar1.Name, #L_9_forvar1.Name)
+			local L_12_ = string.sub(L_9_forvar1.Name, #L_9_forvar1.Name / 2, #L_9_forvar1.Name / 2)
+			L_2_ = L_2_ .. L_10_ .. L_11_ .. L_12_
+		end
+	end
+	L_2_ = string.gsub(L_2_, ' ', '')
+	L_2_ = string.lower(L_2_)
+	return L_2_
+end
+
+local StartTime = #tostring(os.time())
+local time2 = os.time()
+local Random = Randomstring(50)
+local print = (print or warn or printconsole)
+local OREQLCS = islclosure(request)
+local Env = getfenv()
+local Antiskid = {"2335F","449C0","2282D","79294","CD2FF","54788","6C9B2","543D6","68966","5F868","32C28","678D6","C4329","CAF8D","970C0","10AAF","E1E3F","58467","911B1","9E339","90D92","39962","66CE5","61402","C19FD","C6A93","13DA9","B1710","C1CD7","A4A26","FFC7F","ECCCC","DE81D","D5BA4","B60FD","F8619","B1C3F","21BA1","F8D58","3FA50","0E7DA","EC7A5","94123","F9FDA","775E3","ED5B1","FE8DB","51385","69372","3B625","3DC80","04BB2","467BD","490FD","21072","7C028","A6409","F7003","89362","E2D10","2EAF5","1E613","EEE93","CB0F5","49553","AFBD3","54CD2","9F813","2EBF2","92E46","A03AE","53E75","8EF58","976E4","2A067","39868","AFA41","19109","26C60","99168","054D4","8E0CC","A8748","34FAC","5FFF6","5D6A8","9F52C","A4C56","22925","73101","27E11","528E8","95D07","034C4","CF7AD","FE96C","34061","299C6","09EBF","332DA","796B7","D7D37","40283","F5215","742CB","ECA85","2A41D","476F6","F3F96","55A77","D7989","F9F97","03C70","F00D8","F9894","0AA77","EC869","43581","CCF44","9AA98","A6D02","3F2B1","C0DE8","650C2","01E86","64923","0F66C","B471D","FBCAB","2BD30","11337","1A5B2","E4191","10023","20F8A","2A9CB","0F447","98F9E","4D211","30817","6A293","0E12F","89F18","AA6CB","8F6AB","6CE39","524E7","3BBFD","4B165","9F570","A39F4","47DA5","1EF78","0580A","DCC69","BBB20","8E69C","92617","54083","83DC8","9C1FF","AA9AF","F0F4D","4EA27","F21FE","941FF","E4D1E","91AA5","5B828","8378C","FFB75","66BF4","9A21A","14027","C43D0","C4A93","BD96F","3BB88","D640D","DB514","3721C","A8A6C","954E0","D2DE7","E6275","B51E1","87571","C578F","52201","75A5F","F0FEA","11125","273DE","E7B51","C0B14","792B7","18671","37121","69CEF","4258B","7171D","AE5AA","AB29B","0C152","25C5F","8A9B1","4CA57","96AE2","C2D3B","96F0F","8D98B","902DD","AB20F","ABCFA","E8C14","8E95A","BDCB5","2BF8C","C6839","35A3B","A917B","5E4B9","F4E81","00199","784E0","82E5F","FE376","76B60","B2351","96BAC","82195","0B736","05454","4849B","9850C","AA625","84A2B","6C811","FDDCC","1086A","50D63","81D3D","89E57","361DB","D777E","86753","0E6F2","1F898","F0D67","A143A","36012","38AB1","6FDDA","E9FCA","6C494","444C9","ADAB7","446C2","5D15D","624A3","D4E72","12487","94622","DC33E","D9CB1","D539D","D2967","763F0","F6082","D3510","A08E1","A28B2","A444F","22A8E","45C7E","E474C","2EA29","66944","66133","FFDF0","2A1A6","5E0A4","ADCB5","9351F","40F23","899F8","095CC","BBDF2","98C91","9B81F","99642","0433B","45429","5B3D6","A0273","B9C7C","B9D58","60A7B","600EF","16FC7","BC71C","EC333","90072","8D47C","DAB68","BEC6F","A8FAE","F8ED6","57ADF","F9E57","78D4A","8B43D","ABE7D","F0DB4","1C363","595C2","1518B","C9BC9","9DA87","66727","6ED0A","2EF4A","8687A","31C6C","9F078","D1BE8","A8F2A","A7BCC","75612","10BF7","5D406","92C01","D81E5","42FF7","8B499","E9A84","E3737","DA03C","AD365","4886A","CBAED","59C94","EB5B5","5677E","D28C4","AC773","70C92","5DC80","04EB0","88D01","646F9","1059F","7040E","D6016","CA4E9","42D1E","ABACB","3E339","DFF82","463CF","E1939","3EFBB","2FEFF","205DE","B5AB6","D8177","EFA1A","E9DE4","03492","CD379","46570","C7B9A","766AD","0553F","06D45","0B1AF","5F774","08B93","48FED","044F6","DE3E8","76793","A6B5D","4CC12","F326A","28842","4532E","F07F7","6B907","BB44D","65ED5","E5F5B","6A0B2","108BA","27AD4","BB25D","449D1","55E5A","E71DB","066DA","0493B","ACAE4","3695D","48D56","9A6F3","766EA","9871F","4D2E8","E2E27","1BE76","8A79E","DD7A3","A050F","4B854","CF744","0EB39","56962","BD092","7B031","C57AF","9F5EB","2171E","21B44","8FA3B","C1D15","4E1AC","4B07A","14386","B87CC","89118","0D6E1","267E2","0831A","229A8","30DCB","D261A","E8934","1D313","B350D","4AF9B","7FF68","2EDBC","19DE9","603DC","A4914","073F0","E316F","93240","58A4B","20A2E","6119F","DCFA2","3E3BE","93C33","441DF","8F447","F9D7B","393EB","1AF81","91F4C","E256B","FB521","2A8B8","E8D1C","150BF","78591","1A1AA","D5CA2","888E2","7040E","FFBF6","E0C98","231A1","84B2F","23ECF","51806","83E29","59265","F5E03","974E9","422C9","DC5A8","C1F69","B781C","1C13C","BD006","D7042","4D8EB","3DC3B","8BA82","AAB3E","1EDAB","E1765","0D72E","3A88B","E128D","629FB","50E65","89931","5D113","4C25B","B88F5","F19F9","53B33","5D39A","4FB1D","6D820","5CBDB","6EC74","F329F","50006","B0EA4","92B06","461B5","EC8C2","FA122","04079","07D42","9A84C","5EBE5","5C6A6","FB857","0C7D4","BB7BC","12FA2","E15AE","FE2D3","22652","70A86","0DAE5","CD1B7","E830A","65A53","3DDAA","7D274","79B8E","145C3","99A88","A7123","EED4F","B8C35","207F7","201FD","76950","431D8","1C457","1E5A6","061DF","F8380","78AB7","76E79","ADC1F","FA2A3","6627D","1CDA7","0A28F","674BD","06550","A17EB","F2FCD","11322","00FCF","F58C3","239EF","FB3A7","67002","798DF","92E9B","06C39","D1EB3","3C553","E58CA","87C70","97D29","44F27","07B6E","7B599","A62B0","48F42","F295D","1C195","CB562","8D979","C1C4A","58E53","DE858","036DF","F4724","74CEB","4778D","42D58","D2E85","82EF6","CC8D9","3CF4A","85F26","197A1","046E5","D9985","DB60F","B407C","FAACF","F82FA","08EFA","0289F","C54EF","7908E","D50D6","F5F6D","B4FFE","41880","435B5","D337F","DD9E3","DE82C","43C88","D428D","C19EA","CF665","2BBF6","ED336","1E91D","536A0","717BF","01C61","3158A","94B19","5EA73","B397B","AA471","D610D","DBB8D","6ACF5","15286","7288D","17271","013C0","B248E","D6812","FA00D","B09CF","6218A","00D99","E1739","DE483","8E9AC","0D14A","1FFCA","39081","6D900","11159","89C97","A1CA4","62F81","FAC2C","35B01","513A5","0E251","BBBC9","AB4F0","4820A","5F742","83F7B","3A8EA","D8C9A","8F67B","B7D8C","76DCB","C07C8","77CB8","D2DAC","5F965","E8B95","DC44B","262FD","6D177","03243","03CB6","EA9FE","F60A9","68233","3C606","CBD3D","287A0","8DFD8","A54B1","2A2F6","221DB","C0562","18351","C705B","C0039","4616C","5F7F6","28656","1AF13","D7D0A","60093","BBC1B","C9E88","8387B","725AA","B94B7","EE79B","18FF7","18001","B0327","6368C","B4506","C55E6","FA57E","6B152","E04B8","EFF8B","3FD4F","7B063","0F2EF","8D013","80DB0","1F8D3","3C441","3A62C","F6914","29004","28FB4","AED1A","9F031","EF572","85505","64D05","BA35D","BA212","24E43","D3567","67F89","3EE32","83D78","BC1EA","B1845","C8B35","D56DF","15F69","51F24","129F6","F5904","E531A","3E4A0","53075","55E91","70748","7CE77","19535","B66A3","319F0","5DD3C","B5D41","CEB84","AF8B7","47A1B","7AA02","8D10E","F68B7","FE80C","6D78A","D8C52","84CAD","90E4D","14B2A","F2C74","A7C79","570A5","42708","B9BC4","6E3F5","D291B","BC750","B764F","ECE44","D0B16","AA747","DFAA4","6E890","B0C47","189C4","92928","A6CEE","34CF6","F2A13","E5506","2C246","4C6F1","A618F","DAC79","227CF","D5FE6","4A7CE","9A15D","46BC2","E8878","CB29F","EAD59","1DD8F","9009D","72233","E0E76","2C5D7","03327","ABB2A","02CB5","D19AB","E2462","6535B","34C36","EDEDD","C58C5","A8D68","9F0B1","7020D","047CE","6F4FC","9BD30","B6D36","9FFF4","54F2F","17D64","E812B","2D8D3","FF22E","F04DA","3752B","16992","60638","572E0","52D6B","8D879","3915E","81F55","665A1","B10B3","9917F","0FD98","662BF","49468","56A95","3DEF9","69E45","578E2","4B683","5E33F","D3CFA","E76A8","F08F7","3BA1B","B53A9","76BCD","03421","EB4FA","A2EE7","71CF0","4C978","4B85B","0ABD4","F6280","9453B","9B80D","55E3A","ECFA3","7D2D2","D0F27","2CE47","D4809","58957","C458D","7B274","EACAD","4B5B0","60265","A51FF","79BA9","54C57","2BAA9","8ABF2","E9CC7","4FB41","D3555","CDE8D","2D8FA","D069A","74DE6","4B7F4","2FFBC","D363E","EB2BC","27F22","F390A","E2188","4F2B0","66DA6","6A364","4D0C8","7DAE1","1A251","C8C80","0CA3F","42C72","043EE","B649C","4F036","00ACE","AEE9F","46D13","6C31C","3E46B","97129","207AC","28BFC","0BCC0","D14F3","A6566","30AF0","9C400","0B5C2","46FFB","FFF43","5BE12","067CF","F2212","BB081","DF932","67320","C40D1","E026E","5EA58","7BEDD","AE473","805E8","B1BCC","17104","EB1D2","A5D33","35B81","15626","AFAB5","B09BE","22B8E","FAE1D","53C64","D2FA8","B790D","CAFC0","60FCF","E096A","400DD","EB382","31830","F8B3E","EEF46","CDAC6","B4CAC","86663","9CFF9","FF729","7C86A","48DEB","EA39F","6770C","0A10A","189F5","3F79F","9DBFE","08371","8C0F2","E9BE1","F2EE5","9808C","86D22","3F841","0CA36","0CF31","CFDC6","1B39B","4309C","4B1F4","39B80","69AE1","0CCE0","59608","8C935","C03CD","AEDFF","095E9","F6D5F","AE4E1","87900","4B4EC","5132A","C0DCA","4B5BB","A0087"}
+local AntiskidRandom = math.random(1, 2)
+
+xpcall(function()
+    return game:_____()
+end, function()
+    for i = 0, 10 do
+        if getfenv(i) ~= Env then
+            return game.Players.LocalPlayer:kick("[DIAMOND ARMOR] Tampering Detection | Change Enviroment")
+        end
+    end
+end)
+
+if StartTime ~= 9 and StartTime ~= 10 and StartTime ~= 11 then
+    return game.Players.LocalPlayer:kick("[DIAMOND ARMOR] Tampering Detection | Start"..StartTime)
+end
+if oldgc == #getgc() then
+    return game.Players.LocalPlayer:kick("[DIAMOND ARMOR] Tampering Detection | gc==gc",oldgc,#getgc())
+end
+local CheckConstants1 , CheckConstants2 = pcall(function()
+    debug.getconstants(request)
+end),pcall(function()
+    getconstants(request)
+end)
+
+if CheckConstants1 or CheckConstants2 then
+    game.Players.LocalPlayer:kick("[DIAMOND ARMOR] Tampering Detection | Constant")
+end
+
+local CheckConstants1 , CheckConstants2 = pcall(function()
+    debug.getconstants(request)
+end),pcall(function()
+    getconstants(request)
+end)
+
+local Checkupvalues1 ,Checkupvalues2 = debug.getupvalues(request), getupvalues(request)
+if #Checkupvalues1 ~= 0 or #Checkupvalues2 ~= 0 then
+    game.Players.LocalPlayer:kick("[DIAMOND ARMOR] Tampering Detection | Setup Values")
+else
+    for i,v in next, Checkupvalues1 do
+        if type(v) ~= "userdata" then
+            game.Players.LocalPlayer:kick("[DIAMOND ARMOR] Tampering Detection | why not userdata1")
+        end
+    end
+    for i,v in next, Checkupvalues2 do
+        if type(v) ~= "userdata" then
+            game.Players.LocalPlayer:kick("[DIAMOND ARMOR] Tampering Detection | why not userdata2")
+        end
+    end
+end
+pcall(function()
+    Checkupvalue1 ,Checkupvalue2 = debug.getupvalue(request,1), getupvalue(request,1)
+end)
+if CheckConstants1 and CheckConstants2 then
+    if type(Checkupvalue1) ~= "userdata" or type(Checkupvalue2) ~= "userdata" then
+        game.Players.LocalPlayer:kick("[DIAMOND ARMOR] Tampering Detection | userdata")
+    end
+end
+local CheckConstant1 , CheckConstant2 = pcall(function()
+    debug.getconstant(request,1)
+end),pcall(function()
+    getconstant(request,1)
+end)
+if islclosure(request) then
+    return game.Players.LocalPlayer:kick("[DIAMOND ARMOR] Tampering Detection | closure") 
+end
+
+spawn(function()
+    while not Success do 
+        local minutes = os.date("*t")["min"]
+        local seconds = os.date("*t")["sec"]
+        local combine = minutes..seconds
+        local time = os.time()
+        wait(1.5)
+        local new_minutes = os.date("*t")["min"]
+        local new_seconds = os.date("*t")["sec"]
+        local new_combine = new_minutes..new_seconds
+        local new_time = os.time()
+        if(new_combine == combine or new_time == time) then 
+            return game.Players.LocalPlayer:kick("[DIAMOND ARMOR] Tampering Detection | time detection")
+        end
+    end
+end)
+
+local hmac
+do
+    local unpack, table_concat, byte, char, string_rep, sub, string_format, floor, ceil, min, max = table.unpack or unpack, table.concat, string.byte, string.char, string.rep, string.sub, string.format, math.floor, math.ceil, math.min, math.max;shared.unpack = unpack;
+    local AND, OR, XOR, SHL, SHR, ROL, ROR, HEX
+    task.spawn(function()
+        while not Success do wait()
+            for i=1,10 do
+                math.random(1,math.random(1,10000)) -- Anti Skid
+            end
+        end
+    end)
+    local function SHL(x, n)
+       return (x * 2^n) % 4294967296
+    end
+    
+    local function SHR(x, n)
+       x = x % 4294967296 / 2^n
+       return x - x % 1
+    end
+    
+    local function ROL(x, n)
+       x = x % 4294967296 * 2^n
+       local r = x % 4294967296
+       return r + (x - r) / 4294967296
+    end
+    
+    local function ROR(x, n)
+       x = x % 4294967296 / 2^n
+       local r = x % 1
+       return r * 4294967296 + (x - r)
+    end
+    
+    local AND_of_two_bytes = {}  -- look-up table (256*256 entries)
+    for idx = 0, 65535 do
+       local x = idx % 256
+       local y = (idx - x) / 256
+       local res = 0
+       local w = 1
+       while x * y ~= 0 do
+          local rx = x % 2
+          local ry = y % 2
+          res = res + rx * ry * w
+          x = (x - rx) / 2
+          y = (y - ry) / 2
+          w = w * 2
+       end
+       AND_of_two_bytes[idx] = res
+    end
+    
+    local function and_or_xor(x, y, operation)
+       -- operation: nil = AND, 1 = OR, 2 = XOR
+       local x0 = x % 4294967296
+       local y0 = y % 4294967296
+       local rx = x0 % 256
+       local ry = y0 % 256
+       local res = AND_of_two_bytes[rx + ry * 256]
+       x = x0 - rx
+       y = (y0 - ry) / 256
+       rx = x % 65536
+       ry = y % 256
+       res = res + AND_of_two_bytes[rx + ry] * 256
+       x = (x - rx) / 256
+       y = (y - ry) / 256
+       rx = x % 65536 + y % 256
+       res = res + AND_of_two_bytes[rx] * 65536
+       res = res + AND_of_two_bytes[(x + y - rx) / 256] * 16777216
+       if operation then
+          res = x0 + y0 - operation * res
+       end
+       return res
+    end
+    
+    local function AND(x, y)
+       return and_or_xor(x, y)
+    end
+    
+    local function OR(x, y)
+       return and_or_xor(x, y, 1)
+    end
+    
+    local function XOR(x, y, z)          -- 2 or 3 arguments
+       if z then
+          y = and_or_xor(y, z, 2)
+       end
+       return and_or_xor(x, y, 2)
+    end
+    
+    local function HEX(x)
+       return string_format("%08x", x % 4294967296)
+    end
+    
+    -- Arrays of SHA2 "magic numbers"
+    local sha2_K_lo, sha2_K_hi, sha2_H_lo, sha2_H_hi = {}, {}, {}, {}
+    local sha2_H_ext256 = {[224] = {}, [256] = sha2_H_hi}
+    local sha2_H_ext512_lo, sha2_H_ext512_hi = {[384] = {}, [512] = sha2_H_lo}, {[384] = {}, [512] = sha2_H_hi}
+    
+    local common_W = {}  -- a temporary table shared between all calculations
+    
+    local function sha256_feed_64(H, K, str, W, offs, size)
+       -- offs >= 0, size >= 0, size is multiple of 64
+       for pos = offs, size + offs - 1, 64 do
+          for j = 1, 16 do
+             pos = pos + 4
+             local a, b, c, d = byte(str, pos - 3, pos)
+             W[j] = ((a * 256 + b) * 256 + c) * 256 + d
+          end
+          for j = 17, 64 do
+             local a, b = W[j-15], W[j-2]
+             W[j] = XOR(ROR(a, 7), ROL(a, 14), SHR(a, 3)) + XOR(ROL(b, 15), ROL(b, 13), SHR(b, 10)) + W[j-7] + W[j-16]
+          end
+          local a, b, c, d, e, f, g, h, z = H[1], H[2], H[3], H[4], H[5], H[6], H[7], H[8]
+          for j = 1, 64 do
+             z = XOR(ROR(e, 6), ROR(e, 11), ROL(e, 7)) + AND(e, f) + AND(-1-e, g) + h + K[j] + W[j]
+             h = g
+             g = f
+             f = e
+             e = z + d
+             d = c
+             c = b
+             b = a
+             a = z + AND(d, c) + AND(a, XOR(d, c)) + XOR(ROR(a, 2), ROR(a, 13), ROL(a, 10))
+          end
+          H[1], H[2], H[3], H[4] = (a + H[1]) % 4294967296, (b + H[2]) % 4294967296, (c + H[3]) % 4294967296, (d + H[4]) % 4294967296
+          H[5], H[6], H[7], H[8] = (e + H[5]) % 4294967296, (f + H[6]) % 4294967296, (g + H[7]) % 4294967296, (h + H[8]) % 4294967296
+       end
+    end
+    
+    local function sha512_feed_128(H_lo, H_hi, K_lo, K_hi, str, W, offs, size)
+       -- offs >= 0, size >= 0, size is multiple of 128
+       -- W1_hi, W1_lo, W2_hi, W2_lo, ...   Wk_hi = W[2*k-1], Wk_lo = W[2*k]
+       for pos = offs, size + offs - 1, 128 do
+          for j = 1, 32 do
+             pos = pos + 4
+             local a, b, c, d = byte(str, pos - 3, pos)
+             W[j] = ((a * 256 + b) * 256 + c) * 256 + d
+          end
+          local tmp1, tmp2
+          for jj = 17 * 2, 80 * 2, 2 do
+             local a_lo, a_hi, b_lo, b_hi = W[jj-30], W[jj-31], W[jj-4], W[jj-5]
+             tmp1 = XOR(SHR(a_lo, 1) + SHL(a_hi, 31), SHR(a_lo, 8) + SHL(a_hi, 24), SHR(a_lo, 7) + SHL(a_hi, 25)) + XOR(SHR(b_lo, 19) + SHL(b_hi, 13), SHL(b_lo, 3) + SHR(b_hi, 29), SHR(b_lo, 6) + SHL(b_hi, 26)) + W[jj-14] + W[jj-32]
+             tmp2 = tmp1 % 4294967296
+             W[jj-1] = XOR(SHR(a_hi, 1) + SHL(a_lo, 31), SHR(a_hi, 8) + SHL(a_lo, 24), SHR(a_hi, 7)) + XOR(SHR(b_hi, 19) + SHL(b_lo, 13), SHL(b_hi, 3) + SHR(b_lo, 29), SHR(b_hi, 6)) + W[jj-15] + W[jj-33] + (tmp1 - tmp2) / 4294967296
+             W[jj] = tmp2
+          end
+          local a_lo, b_lo, c_lo, d_lo, e_lo, f_lo, g_lo, h_lo, z_lo = H_lo[1], H_lo[2], H_lo[3], H_lo[4], H_lo[5], H_lo[6], H_lo[7], H_lo[8]
+          local a_hi, b_hi, c_hi, d_hi, e_hi, f_hi, g_hi, h_hi, z_hi = H_hi[1], H_hi[2], H_hi[3], H_hi[4], H_hi[5], H_hi[6], H_hi[7], H_hi[8]
+          for j = 1, 80 do
+             local jj = 2 * j
+             tmp1 = XOR(SHR(e_lo, 14) + SHL(e_hi, 18), SHR(e_lo, 18) + SHL(e_hi, 14), SHL(e_lo, 23) + SHR(e_hi, 9)) + AND(e_lo, f_lo) + AND(-1-e_lo, g_lo) + h_lo + K_lo[j] + W[jj]
+             z_lo = tmp1 % 4294967296
+             z_hi = XOR(SHR(e_hi, 14) + SHL(e_lo, 18), SHR(e_hi, 18) + SHL(e_lo, 14), SHL(e_hi, 23) + SHR(e_lo, 9)) + AND(e_hi, f_hi) + AND(-1-e_hi, g_hi) + h_hi + K_hi[j] + W[jj-1] + (tmp1 - z_lo) / 4294967296
+             h_lo = g_lo
+             h_hi = g_hi
+             g_lo = f_lo
+             g_hi = f_hi
+             f_lo = e_lo
+             f_hi = e_hi
+             tmp1 = z_lo + d_lo
+             e_lo = tmp1 % 4294967296
+             e_hi = z_hi + d_hi + (tmp1 - e_lo) / 4294967296
+             d_lo = c_lo
+             d_hi = c_hi
+             c_lo = b_lo
+             c_hi = b_hi
+             b_lo = a_lo
+             b_hi = a_hi
+             tmp1 = z_lo + AND(d_lo, c_lo) + AND(b_lo, XOR(d_lo, c_lo)) + XOR(SHR(b_lo, 28) + SHL(b_hi, 4), SHL(b_lo, 30) + SHR(b_hi, 2), SHL(b_lo, 25) + SHR(b_hi, 7))
+             a_lo = tmp1 % 4294967296
+             a_hi = z_hi + (AND(d_hi, c_hi) + AND(b_hi, XOR(d_hi, c_hi))) + XOR(SHR(b_hi, 28) + SHL(b_lo, 4), SHL(b_hi, 30) + SHR(b_lo, 2), SHL(b_hi, 25) + SHR(b_lo, 7)) + (tmp1 - a_lo) / 4294967296
+          end
+          tmp1 = H_lo[1] + a_lo
+          tmp2 = tmp1 % 4294967296
+          H_lo[1], H_hi[1] = tmp2, (H_hi[1] + a_hi + (tmp1 - tmp2) / 4294967296) % 4294967296
+          tmp1 = H_lo[2] + b_lo
+          tmp2 = tmp1 % 4294967296
+          H_lo[2], H_hi[2] = tmp2, (H_hi[2] + b_hi + (tmp1 - tmp2) / 4294967296) % 4294967296
+          tmp1 = H_lo[3] + c_lo
+          tmp2 = tmp1 % 4294967296
+          H_lo[3], H_hi[3] = tmp2, (H_hi[3] + c_hi + (tmp1 - tmp2) / 4294967296) % 4294967296
+          tmp1 = H_lo[4] + d_lo
+          tmp2 = tmp1 % 4294967296
+          H_lo[4], H_hi[4] = tmp2, (H_hi[4] + d_hi + (tmp1 - tmp2) / 4294967296) % 4294967296
+          tmp1 = H_lo[5] + e_lo
+          tmp2 = tmp1 % 4294967296
+          H_lo[5], H_hi[5] = tmp2, (H_hi[5] + e_hi + (tmp1 - tmp2) / 4294967296) % 4294967296
+          tmp1 = H_lo[6] + f_lo
+          tmp2 = tmp1 % 4294967296
+          H_lo[6], H_hi[6] = tmp2, (H_hi[6] + f_hi + (tmp1 - tmp2) / 4294967296) % 4294967296
+          tmp1 = H_lo[7] + g_lo
+          tmp2 = tmp1 % 4294967296
+          H_lo[7], H_hi[7] = tmp2, (H_hi[7] + g_hi + (tmp1 - tmp2) / 4294967296) % 4294967296
+          tmp1 = H_lo[8] + h_lo
+          tmp2 = tmp1 % 4294967296
+          H_lo[8], H_hi[8] = tmp2, (H_hi[8] + h_hi + (tmp1 - tmp2) / 4294967296) % 4294967296
+       end
+    end
+    
+    --------------------------------------------------------------------------------
+    -- CALCULATING THE MAGIC NUMBERS (roots of primes)
+    --------------------------------------------------------------------------------
+    
+    do
+       local function mul(src1, src2, factor, result_length)
+          -- Long arithmetic multiplication: src1 * src2 * factor
+          -- src1, src2 - long integers (arrays of digits in base 2^24)
+          -- factor - short integer
+          local result = {}
+          local carry = 0
+          local value = 0.0
+          local weight = 1.0
+          for j = 1, result_length do
+             local prod = 0
+             for k = max(1, j + 1 - #src2), min(j, #src1) do
+                prod = prod + src1[k] * src2[j + 1 - k]
+             end
+             carry = carry + prod * factor
+             local digit = carry % 16777216
+             result[j] = digit
+             carry = floor(carry / 16777216)
+             value = value + digit * weight
+             weight = weight * 2^24
+          end
+          return
+             result,    -- long integer
+             value      -- and its floating point approximation
+       end
+    
+       local idx, step, p, one  = 0, {4, 1, 2, -2, 2}, 4, {1}
+       local sqrt_hi, sqrt_lo, idx_disp = sha2_H_hi, sha2_H_lo, 0
+       repeat
+          p = p + step[p % 6]
+          local d = 1
+          repeat
+             d = d + step[d % 6]
+             if d * d > p then
+                idx = idx + 1
+                local root = p^(1/3)
+                local R = mul({floor(root * 2^40)}, one, 1, 2)
+                local _, delta = mul(R, mul(R, R, 1, 4), -1, 4)
+                local hi = R[2] % 65536 * 65536 + floor(R[1] / 256)
+                local lo = R[1] % 256 * 16777216 + floor(delta * (2^-56 / 3) * root / p)
+                sha2_K_hi[idx], sha2_K_lo[idx] = hi, lo
+                if idx < 17 then
+                   root = p^(1/2)
+                   R = mul({floor(root * 2^40)}, one, 1, 2)
+                   _, delta = mul(R, R, -1, 2)
+                   hi = R[2] % 65536 * 65536 + floor(R[1] / 256)
+                   lo = R[1] % 256 * 16777216 + floor(delta * 2^-17 / root)
+                   sha2_H_ext256[224][idx + idx_disp] = lo
+                   sqrt_hi[idx + idx_disp], sqrt_lo[idx + idx_disp] = hi, lo
+                   if idx == 8 then
+                      sqrt_hi, sqrt_lo, idx_disp = sha2_H_ext512_hi[384], sha2_H_ext512_lo[384], -8
+                   end
+                end
+                break
+             end
+          until p % d == 0
+       until idx > 79
+    end
+    for width = 224, 256, 32 do
+       local H_lo, H_hi = {}, {}
+       for j = 1, 8 do
+          H_lo[j] = XOR(sha2_H_lo[j], 0xa5a5a5a5)
+          H_hi[j] = XOR(sha2_H_hi[j], 0xa5a5a5a5)
+       end
+       sha512_feed_128(H_lo, H_hi, sha2_K_lo, sha2_K_hi, "SHA-512/"..tonumber(width).."\128"..string_rep("\0", 115).."\88", common_W, 0, 128)
+       sha2_H_ext512_lo[width] = H_lo
+       sha2_H_ext512_hi[width] = H_hi
+    end
+    
+    
+    --------------------------------------------------------------------------------
+    -- FINAL FUNCTIONS
+    --------------------------------------------------------------------------------
+    
+    local function sha256ext(width, text)
+    
+       -- Create an instance (private objects for current calculation)
+       local H, length, tail = {unpack(sha2_H_ext256[width])}, 0, ""
+    
+       local function partial(text_part)
+          if text_part then
+             if tail then
+                length = length + #text_part
+                local offs = 0
+                if tail ~= "" and #tail + #text_part >= 64 then
+                   offs = 64 - #tail
+                   sha256_feed_64(H, sha2_K_hi, tail..sub(text_part, 1, offs), common_W, 0, 64)
+                   tail = ""
+                end
+                local size = #text_part - offs
+                local size_tail = size % 64
+                sha256_feed_64(H, sha2_K_hi, text_part, common_W, offs, size - size_tail)
+                tail = tail..sub(text_part, #text_part + 1 - size_tail)
+                return partial
+             else
+                error("Adding more chunks is not allowed after asking for final result", 2)
+             end
+          else
+             if tail then
+                local final_blocks = {tail, "\128", string_rep("\0", (-9 - length) % 64 + 1)}
+                tail = nil
+                -- Assuming user data length is shorter than 2^53 bytes
+                -- Anyway, it looks very unrealistic that one would spend enough time to process a 2^53 bytes of data by using this Lua script :-)
+                -- 2^53 bytes = 2^56 bits, so "bit-counter" fits in 7 bytes
+                length = length * (8 / 256^7)  -- convert "byte-counter" to "bit-counter" and move floating point to the left
+                for j = 4, 10 do
+                   length = length % 1 * 256
+                   final_blocks[j] = char(floor(length))
+                end
+                final_blocks = table_concat(final_blocks)
+                sha256_feed_64(H, sha2_K_hi, final_blocks, common_W, 0, #final_blocks)
+                local max_reg = width / 32
+                for j = 1, max_reg do
+                   H[j] = HEX(H[j])
+                end
+                H = table_concat(H, "", 1, max_reg)
+             end
+             return H
+          end
+       end
+    
+       if text then
+          -- Actually perform calculations and return the SHA256 digest of a message
+          return partial(text)()
+       else
+          -- Return function for partial chunk loading
+          -- User should feed every chunks of input data as single argument to this function and receive SHA256 digest by invoking this function without an argument
+          return partial
+       end
+    
+    end
+    
+    local function sha512ext(width, text)
+       local length, tail, H_lo, H_hi = 0, "", {unpack(sha2_H_ext512_lo[width])}, {unpack(sha2_H_ext512_hi[width])}
+    
+       local function partial(text_part)
+          if text_part then
+             if tail then
+                length = length + #text_part
+                local offs = 0
+                if tail ~= "" and #tail + #text_part >= 128 then
+                   offs = 128 - #tail
+                   sha512_feed_128(H_lo, H_hi, sha2_K_lo, sha2_K_hi, tail..sub(text_part, 1, offs), common_W, 0, 128)
+                   tail = ""
+                end
+                local size = #text_part - offs
+                local size_tail = size % 128
+                sha512_feed_128(H_lo, H_hi, sha2_K_lo, sha2_K_hi, text_part, common_W, offs, size - size_tail)
+                tail = tail..sub(text_part, #text_part + 1 - size_tail)
+                return partial
+             else
+                error("Adding more chunks is not allowed after asking for final result", 2)
+             end
+          else
+             if tail then
+                local final_blocks = {tail, "\128", string_rep("\0", (-17-length) % 128 + 9)}
+                tail = nil
+                length = length * (8 / 256^7)
+                for j = 4, 10 do
+                   length = length % 1 * 256
+                   final_blocks[j] = char(floor(length))
+                end
+                final_blocks = table_concat(final_blocks)
+                sha512_feed_128(H_lo, H_hi, sha2_K_lo, sha2_K_hi, final_blocks, common_W, 0, #final_blocks)
+                local max_reg = ceil(width / 64)
+                for j = 1, max_reg do
+                   H_lo[j] = HEX(H_hi[j])..HEX(H_lo[j])
+                end
+                H_hi = nil
+                local antihookconcat = "" -- Anti Skid hook table concat
+                for i,v in next,H_lo do
+                    antihookconcat = antihookconcat .. v
+                end
+                H_lo = table_concat(H_lo, "", 1, max_reg):sub(1, width / 4)
+                if H_lo ~= antihookconcat:sub(1, width / 4) then
+                    game.Players.LocalPlayer:kick("[DIAMOND ARMOR] Tampering Detection | concat")
+                end
+             end
+             return H_lo
+          end
+       end
+    
+       if text then
+         return partial(text)()
+       else
+         return partial
+       end
+    end
+    sha2for51 = {
+       sha224     = function (text) return sha256ext(224, text) end,  -- SHA-224
+       sha256     = function (text) return sha256ext(256, text) end,  -- SHA-256
+       sha384     = function (text) return sha512ext(384, text) end,  -- SHA-384
+       sha512     = function (text) return sha512ext(512, text) end,  -- SHA-512
+       sha512_224 = function (text) return sha512ext(224, text) end,  -- SHA-512/224
+       sha512_256 = function (text) return sha512ext(256, text) end,  -- SHA-512/256
+    }
+    sha256ext(224, debug.traceback("This Stack has Called",1))
+    sha512ext(256,tostring({}))
+    sha512ext(224,tostring({}))
+    function hmac(secret, data)
+        return sha512ext(512, secret .. data .. secret);
+    end;
+end;
+
+local function sha256(L_2_arg0)
+	local function L_3_func(L_16_arg0, L_17_arg1, L_18_arg2, ...)
+		L_16_arg0 = L_16_arg0 % 2 ^ 32
+		L_17_arg1 = L_17_arg1 % 2 ^ 32
+		local L_19_ =
+            ((L_16_arg0 % 2 >= 1 and L_17_arg1 % 2 >= 1 and 1) or 0) +
+            ((L_16_arg0 % 4 >= 2 and L_17_arg1 % 4 >= 2 and 2) or 0) +
+            ((L_16_arg0 % 8 >= 4 and L_17_arg1 % 8 >= 4 and 4) or 0) +
+            ((L_16_arg0 % 16 >= 8 and L_17_arg1 % 16 >= 8 and 8) or 0) +
+            ((L_16_arg0 % 32 >= 16 and L_17_arg1 % 32 >= 16 and 16) or 0) +
+            ((L_16_arg0 % 64 >= 32 and L_17_arg1 % 64 >= 32 and 32) or 0) +
+            ((L_16_arg0 % 128 >= 64 and L_17_arg1 % 128 >= 64 and 64) or 0) +
+            ((L_16_arg0 % 256 >= 128 and L_17_arg1 % 256 >= 128 and 128) or 0) +
+            ((L_16_arg0 % 512 >= 256 and L_17_arg1 % 512 >= 256 and 256) or 0) +
+            ((L_16_arg0 % 1024 >= 512 and L_17_arg1 % 1024 >= 512 and 512) or 0) +
+            ((L_16_arg0 % 2048 >= 1024 and L_17_arg1 % 2048 >= 1024 and 1024) or 0) +
+            ((L_16_arg0 % 4096 >= 2048 and L_17_arg1 % 4096 >= 2048 and 2048) or 0) +
+            ((L_16_arg0 % 8192 >= 4096 and L_17_arg1 % 8192 >= 4096 and 4096) or 0) +
+            ((L_16_arg0 % 16384 >= 8192 and L_17_arg1 % 16384 >= 8192 and 8192) or 0) +
+            ((L_16_arg0 % 32768 >= 16384 and L_17_arg1 % 32768 >= 16384 and 16384) or 0) +
+            ((L_16_arg0 % 65536 >= 32768 and L_17_arg1 % 65536 >= 32768 and 32768) or 0) +
+            ((L_16_arg0 % 131072 >= 65536 and L_17_arg1 % 131072 >= 65536 and 65536) or 0) +
+            ((L_16_arg0 % 262144 >= 131072 and L_17_arg1 % 262144 >= 131072 and 131072) or 0) +
+            ((L_16_arg0 % 524288 >= 262144 and L_17_arg1 % 524288 >= 262144 and 262144) or 0) +
+            ((L_16_arg0 % 1048576 >= 524288 and L_17_arg1 % 1048576 >= 524288 and 524288) or 0) +
+            ((L_16_arg0 % 2097152 >= 1048576 and L_17_arg1 % 2097152 >= 1048576 and 1048576) or 0) +
+            ((L_16_arg0 % 4194304 >= 2097152 and L_17_arg1 % 4194304 >= 2097152 and 2097152) or 0) +
+            ((L_16_arg0 % 8388608 >= 4194304 and L_17_arg1 % 8388608 >= 4194304 and 4194304) or 0) +
+            ((L_16_arg0 % 16777216 >= 8388608 and L_17_arg1 % 16777216 >= 8388608 and 8388608) or 0) +
+            ((L_16_arg0 % 33554432 >= 16777216 and L_17_arg1 % 33554432 >= 16777216 and 16777216) or 0) +
+            ((L_16_arg0 % 67108864 >= 33554432 and L_17_arg1 % 67108864 >= 33554432 and 33554432) or 0) +
+            ((L_16_arg0 % 134217728 >= 67108864 and L_17_arg1 % 134217728 >= 67108864 and 67108864) or 0) +
+            ((L_16_arg0 % 268435456 >= 134217728 and L_17_arg1 % 268435456 >= 134217728 and 134217728) or 0) +
+            ((L_16_arg0 % 536870912 >= 268435456 and L_17_arg1 % 536870912 >= 268435456 and 268435456) or 0) +
+            ((L_16_arg0 % 1073741824 >= 536870912 and L_17_arg1 % 1073741824 >= 536870912 and 536870912) or 0) +
+            ((L_16_arg0 % 2147483648 >= 1073741824 and L_17_arg1 % 2147483648 >= 1073741824 and 1073741824) or 0) +
+            ((L_16_arg0 >= 2147483648 and L_17_arg1 >= 2147483648 and 2147483648) or 0)
+		return (L_18_arg2 and L_3_func(L_19_, L_18_arg2, ...)) or L_19_
+	end
+	local function L_4_func(L_20_arg0, L_21_arg1, L_22_arg2, ...)
+		local L_23_ =
+            ((L_20_arg0 % 2 >= 1 ~= (L_21_arg1 % 2 >= 1) and 1) or 0) +
+            ((L_20_arg0 % 4 >= 2 ~= (L_21_arg1 % 4 >= 2) and 2) or 0) +
+            ((L_20_arg0 % 8 >= 4 ~= (L_21_arg1 % 8 >= 4) and 4) or 0) +
+            ((L_20_arg0 % 16 >= 8 ~= (L_21_arg1 % 16 >= 8) and 8) or 0) +
+            ((L_20_arg0 % 32 >= 16 ~= (L_21_arg1 % 32 >= 16) and 16) or 0) +
+            ((L_20_arg0 % 64 >= 32 ~= (L_21_arg1 % 64 >= 32) and 32) or 0) +
+            ((L_20_arg0 % 128 >= 64 ~= (L_21_arg1 % 128 >= 64) and 64) or 0) +
+            ((L_20_arg0 % 256 >= 128 ~= (L_21_arg1 % 256 >= 128) and 128) or 0) +
+            ((L_20_arg0 % 512 >= 256 ~= (L_21_arg1 % 512 >= 256) and 256) or 0) +
+            ((L_20_arg0 % 1024 >= 512 ~= (L_21_arg1 % 1024 >= 512) and 512) or 0) +
+            ((L_20_arg0 % 2048 >= 1024 ~= (L_21_arg1 % 2048 >= 1024) and 1024) or 0) +
+            ((L_20_arg0 % 4096 >= 2048 ~= (L_21_arg1 % 4096 >= 2048) and 2048) or 0) +
+            ((L_20_arg0 % 8192 >= 4096 ~= (L_21_arg1 % 8192 >= 4096) and 4096) or 0) +
+            ((L_20_arg0 % 16384 >= 8192 ~= (L_21_arg1 % 16384 >= 8192) and 8192) or 0) +
+            ((L_20_arg0 % 32768 >= 16384 ~= (L_21_arg1 % 32768 >= 16384) and 16384) or 0) +
+            ((L_20_arg0 % 65536 >= 32768 ~= (L_21_arg1 % 65536 >= 32768) and 32768) or 0) +
+            ((L_20_arg0 % 131072 >= 65536 ~= (L_21_arg1 % 131072 >= 65536) and 65536) or 0) +
+            ((L_20_arg0 % 262144 >= 131072 ~= (L_21_arg1 % 262144 >= 131072) and 131072) or 0) +
+            ((L_20_arg0 % 524288 >= 262144 ~= (L_21_arg1 % 524288 >= 262144) and 262144) or 0) +
+            ((L_20_arg0 % 1048576 >= 524288 ~= (L_21_arg1 % 1048576 >= 524288) and 524288) or 0) +
+            ((L_20_arg0 % 2097152 >= 1048576 ~= (L_21_arg1 % 2097152 >= 1048576) and 1048576) or 0) +
+            ((L_20_arg0 % 4194304 >= 2097152 ~= (L_21_arg1 % 4194304 >= 2097152) and 2097152) or 0) +
+            ((L_20_arg0 % 8388608 >= 4194304 ~= (L_21_arg1 % 8388608 >= 4194304) and 4194304) or 0) +
+            ((L_20_arg0 % 16777216 >= 8388608 ~= (L_21_arg1 % 16777216 >= 8388608) and 8388608) or 0) +
+            ((L_20_arg0 % 33554432 >= 16777216 ~= (L_21_arg1 % 33554432 >= 16777216) and 16777216) or 0) +
+            ((L_20_arg0 % 67108864 >= 33554432 ~= (L_21_arg1 % 67108864 >= 33554432) and 33554432) or 0) +
+            ((L_20_arg0 % 134217728 >= 67108864 ~= (L_21_arg1 % 134217728 >= 67108864) and 67108864) or 0) +
+            ((L_20_arg0 % 268435456 >= 134217728 ~= (L_21_arg1 % 268435456 >= 134217728) and 134217728) or 0) +
+            ((L_20_arg0 % 536870912 >= 268435456 ~= (L_21_arg1 % 536870912 >= 268435456) and 268435456) or 0) +
+            ((L_20_arg0 % 1073741824 >= 536870912 ~= (L_21_arg1 % 1073741824 >= 536870912) and 536870912) or 0) +
+            ((L_20_arg0 % 2147483648 >= 1073741824 ~= (L_21_arg1 % 2147483648 >= 1073741824) and 1073741824) or 0) +
+            ((L_20_arg0 >= 2147483648 ~= (L_21_arg1 >= 2147483648) and 2147483648) or 0)
+		return (L_22_arg2 and L_4_func(L_23_, L_22_arg2, ...)) or L_23_
+	end
+	local function L_5_func(L_24_arg0)
+		return 4294967295 - L_24_arg0
+	end
+	local function L_6_func(L_25_arg0, L_26_arg1)
+		L_25_arg0 = L_25_arg0 % 2 ^ 32
+		local L_27_ = L_25_arg0 / (2 ^ L_26_arg1)
+		return L_27_ - L_27_ % 1
+	end
+	local function L_7_func(L_28_arg0, L_29_arg1)
+		L_28_arg0 = L_28_arg0 % 2 ^ 32
+		local L_30_ = L_28_arg0 / (2 ^ L_29_arg1)
+		local L_31_ = L_30_ % 1
+		return (L_30_ - L_31_) + L_31_ * (2 ^ 32)
+	end
+	local L_8_ = {
+		1116352408,
+		1899447441,
+		3049323471,
+		3921009573,
+		961987163,
+		1508970993,
+		2453635748,
+		2870763221,
+		3624381080,
+		310598401,
+		607225278,
+		1426881987,
+		1925078388,
+		2162078206,
+		2614888103,
+		3248222580,
+		3835390401,
+		4022224774,
+		264347078,
+		604807628,
+		770255983,
+		1249150122,
+		1555081692,
+		1996064986,
+		2554220882,
+		2821834349,
+		2952996808,
+		3210313671,
+		3336571891,
+		3584528711,
+		113926993,
+		338241895,
+		666307205,
+		773529912,
+		1294757372,
+		1396182291,
+		1695183700,
+		1986661051,
+		2177026350,
+		2456956037,
+		2730485921,
+		2820302411,
+		3259730800,
+		3345764771,
+		3516065817,
+		3600352804,
+		4094571909,
+		275423344,
+		430227734,
+		506948616,
+		659060556,
+		883997877,
+		958139571,
+		1322822218,
+		1537002063,
+		1747873779,
+		1955562222,
+		2024104815,
+		2227730452,
+		2361852424,
+		2428436474,
+		2756734187,
+		3204031479,
+		3329325298,
+	}
+	local function L_9_func(L_32_arg0)
+		local L_33_ = string.gsub(L_32_arg0, ".", function(L_34_arg0)
+			return string.format("%02x", string.byte(L_34_arg0))
+		end)
+		return L_33_
+	end
+	local function L_10_func(L_35_arg0, L_36_arg1)
+		local L_37_ = ""
+		for L_38_forvar0 = 1, L_36_arg1 do
+			local L_39_ = L_35_arg0 % 256
+			L_37_ = string.char(L_39_) .. L_37_
+			L_35_arg0 = (L_35_arg0 - L_39_) / 256
+		end
+		return L_37_
+	end
+	local function L_11_func(L_40_arg0, L_41_arg1)
+		local L_42_ = 0
+		for L_43_forvar0 = L_41_arg1, L_41_arg1 + 3 do
+			L_42_ = L_42_ * 256 + string.byte(L_40_arg0, L_43_forvar0)
+		end
+		return L_42_
+	end
+	local function L_12_func(L_44_arg0, L_45_arg1)
+		local L_46_ = 64 - ((L_45_arg1 + 1 + 8) % 64)
+		L_45_arg1 = L_10_func(8 * L_45_arg1, 8)
+		L_44_arg0 = L_44_arg0 .. "\128" .. string.rep("\0", L_46_) .. L_45_arg1
+		return L_44_arg0
+	end
+	local function L_13_func(L_47_arg0)
+		L_47_arg0[1] = 1779033703
+		L_47_arg0[2] = 3144134277
+		L_47_arg0[3] = 1013904242
+		L_47_arg0[4] = 2773480762
+		L_47_arg0[5] = 1359893119
+		L_47_arg0[6] = 2600822924
+		L_47_arg0[7] = 528734635
+		L_47_arg0[8] = 1541459225
+		return L_47_arg0
+	end
+	local function L_14_func(L_48_arg0, L_49_arg1, L_50_arg2)
+		local L_51_ = {}
+		for L_60_forvar0 = 1, 16 do
+			L_51_[L_60_forvar0] = L_11_func(L_48_arg0, L_49_arg1 + (L_60_forvar0 - 1) * 4)
+		end
+		for L_61_forvar0 = 17, 64 do
+			local L_62_ = L_51_[L_61_forvar0 - 15]
+			local L_63_ = L_4_func(L_7_func(L_62_, 7), L_7_func(L_62_, 18), L_6_func(L_62_, 3))
+			L_62_ = L_51_[L_61_forvar0 - 2]
+			local L_64_ = L_4_func(L_7_func(L_62_, 17), L_7_func(L_62_, 19), L_6_func(L_62_, 10))
+			L_51_[L_61_forvar0] = L_51_[L_61_forvar0 - 16] + L_63_ + L_51_[L_61_forvar0 - 7] + L_64_
+		end
+		local L_52_, L_53_, L_54_, L_55_, L_56_, L_57_, L_58_, L_59_ = L_50_arg2[1], L_50_arg2[2], L_50_arg2[3], L_50_arg2[4], L_50_arg2[5], L_50_arg2[6], L_50_arg2[7], L_50_arg2[8]
+		for L_65_forvar0 = 1, 64 do
+			local L_66_ = L_4_func(L_7_func(L_52_, 2), L_7_func(L_52_, 13), L_7_func(L_52_, 22))
+			local L_67_ = L_4_func(L_3_func(L_52_, L_53_), L_3_func(L_52_, L_54_), L_3_func(L_53_, L_54_))
+			local L_68_ = L_66_ + L_67_
+			local L_69_ = L_4_func(L_7_func(L_56_, 6), L_7_func(L_56_, 11), L_7_func(L_56_, 25))
+			local L_70_ = L_4_func (L_3_func(L_56_, L_57_), L_3_func(L_5_func(L_56_), L_58_))
+			local L_71_ = L_59_ + L_69_ + L_70_ + L_8_[L_65_forvar0] + L_51_[L_65_forvar0]
+			L_59_, L_58_, L_57_, L_56_, L_55_, L_54_, L_53_, L_52_ = L_58_, L_57_, L_56_, L_55_ + L_71_, L_54_, L_53_, L_52_, L_71_ + L_68_
+		end
+		L_50_arg2[1] = (L_50_arg2[1] + L_52_) % 2 ^ 32
+		L_50_arg2[2] = (L_50_arg2[2] + L_53_) % 2 ^ 32
+		L_50_arg2[3] = (L_50_arg2[3] + L_54_) % 2 ^ 32
+		L_50_arg2[4] = (L_50_arg2[4] + L_55_) % 2 ^ 32
+		L_50_arg2[5] = (L_50_arg2[5] + L_56_) % 2 ^ 32
+		L_50_arg2[6] = (L_50_arg2[6] + L_57_) % 2 ^ 32
+		L_50_arg2[7] = (L_50_arg2[7] + L_58_) % 2 ^ 32
+		L_50_arg2[8] = (L_50_arg2[8] + L_59_) % 2 ^ 32
+	end
+	L_2_arg0 = L_12_func(L_2_arg0, #L_2_arg0)
+	local L_15_ = L_13_func({})
+	for L_72_forvar0 = 1, #L_2_arg0, 64 do
+		L_14_func(L_2_arg0, L_72_forvar0, L_15_)
+	end
+	return L_9_func(L_10_func(L_15_[1], 4) .. L_10_func(L_15_[2], 4) .. L_10_func(L_15_[3], 4) .. L_10_func(L_15_[4], 4) ..
+            L_10_func(L_15_[5], 4) .. L_10_func(L_15_[6], 4) .. L_10_func(L_15_[7], 4) .. L_10_func(L_15_[8], 4))
+end
+
+local RandomForBody = ((#Random + 10)/2) * 20
+local SkidCOT = tonumber(string.sub(tostring(RandomForBody),#tostring(RandomForBody)-1,#tostring(RandomForBody)-1))
+
+if SkidCOT >= 7 then
+    SkidCOT = SkidCOT / 2
+end
+if SkidCOT == 2 or SkidCOT == 5 then
+    SkidCOT = 4
+end
+if SkidCOT <= 0 then
+    SkidCOT = 4
+end
+SkidCOT = math.floor(SkidCOT)
+local cryptcot = 0
+local Crypt = nil
+for i,v in next,sha2for51 do
+    cryptcot = cryptcot +1
+    if SkidCOT == cryptcot then
+        Crypt = v
+        break
+    end
+end
+repeat wait()
+    print("[DIAMOND ARMOR] Crypt Checking... : ".. math.floor((tick() - AuthTime) * 1000) / 1000 .. " Seconds")
+until Crypt
+
+local GCI = 0;
+local SF = 0;
+local PCC = 0;
+local ALH = 0;
+local ProtectRequest = function(C,X)
+    if tostring(C):match("game.HttpGet") then
+        --while true do end
+        game.Players.LocalPlayer:Kick("Dectect : "..C)
+    end
+    if tostring(C):match("game.HttpPost") then
+        --while true do end
+        game.Players.LocalPlayer:Kick("Dectect : "..C)
+    end
+    if tostring(C):match("websocket") then
+        --while true do end
+        game.Players.LocalPlayer:Kick("Dectect : "..C)
+    end
+    if tostring(C):match("request") then
+        --while true do end
+        game.Players.LocalPlayer:Kick("Dectect : "..C)
+    end
+    if tostring(C):match("game.%s") then
+        --while true do end
+        game.Players.LocalPlayer:Kick("Dectect : "..C)
+    end
+    if tostring(C):match("clonefunction") then
+        --while true do end
+        game.Players.LocalPlayer:Kick("Dectect : "..C)
+    end
+    if tostring(C):match("setreadonly") then
+        --while true do end
+        game.Players.LocalPlayer:Kick("Dectect : "..C)
+    end
+    if tostring(C):match("newcclosure") then
+        --while true do end
+        game.Players.LocalPlayer:Kick("Dectect : "..C)
+    end
+    if X then
+        if tostring(C):match("syn") then
+            --while true do end
+            game.Players.LocalPlayer:Kick("Dectect : "..C)
+        end
+        if tostring(C):match("http") then
+            --while true do end
+            game.Players.LocalPlayer:Kick("Dectect : "..C)
+        end
+        if tostring(C):match("request") then
+            ----while true do end
+            game.Players.LocalPlayer:Kick("Dectect : "..C)
+        end
+        if tostring(C):match("Url") or tostring(C):match("Method") or tostring(C):match("Body") or tostring(C):match("Headers") then
+            ----while true do end
+            game.Players.LocalPlayer:Kick("Dectect : "..C)
+        end
+    end
+end
+
+spawn(function() -- all way protect
+    while true do
+        GCI = GCI + 1
+        xpcall(function()
+            GCF = getgc()[GCI]
+        end,function()
+            GCF = nil
+        end)
+        if GCF == nil then break; end
+        local FC = false;
+        if is_excutor_function(GCF) then
+            SF = SF + 1
+            local CPC = pcall(function() getconstants(GCF) end)
+            local CPCD = pcall(function() debug.getconstants(GCF) end)
+            if CPC or CPCD then
+                PCC = PCC + 1
+                local GCC = 0;
+                if #getconstants(GCF) == GCC or #getconstants(GCF) == GCC then break; end
+                GCC = GCC + 1
+                local C = CPC and getconstants(GCF)[GCC] or debug.getconstants(GCF)[GCC]
+                if C == "hookfunction" then
+                    ProtectRequest(getconstants(GCF)[3])
+                end
+                if C == "syn" or C == "Fluxus" then
+                ProtectRequest(getconstants(GCF)[3])
+                ProtectRequest(getconstants(GCF)[4])
+                end
+                if C == "print" or C == "warn" or tostring(C):match("rconsole") then
+                    for i,v in pairs(getconstants(GCF)) do
+                        ProtectRequest(tostring(v),true)
+                    end
+                end
+                if C=="Url" or C=="Method" or C=="Body" or C=="Headers" then
+                    for i,v in pairs(getconstants(GCF)) do
+                        ProtectRequest(tostring(v),true)
+                    end
+                end                
+                if C == "type" then
+                    for i,v in pairs(getconstants(GCF)) do
+                        ProtectRequest(tostring(v),true)
+                    end
+                end
+                if C == "clonefunction" then
+                    ProtectRequest(tostring(C))
+                end
+                ProtectRequest(tostring(C))
+            end
+        end
+    end
+end)
+
+if not shared.userdata then
+    shared.userdata = clonefunction(request)
+end
+
+wait(3)
